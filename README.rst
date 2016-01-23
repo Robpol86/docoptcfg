@@ -4,7 +4,7 @@ docoptcfg
 
 Set docopt defaults using configuration files and/or environment variables.
 
-* Python 2.5, 2.6, 2.7, PyPy, PyPy3, 3.3, 3.4, and 3.5 supported on Linux and OS X.
+* Python 2.6, 2.7, PyPy, PyPy3, 3.3, 3.4, and 3.5 supported on Linux and OS X.
 * Python 2.7, 3.3, 3.4, and 3.5 supported on Windows (both 32 and 64 bit versions of Python).
 
 .. image:: https://img.shields.io/appveyor/ci/Robpol86/docoptcfg/master.svg?style=flat-square&label=AppVeyor%20CI
