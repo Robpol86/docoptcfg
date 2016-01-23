@@ -1,0 +1,15 @@
+language: python
+
+sudo: false
+
+install:
+  - pip install appveyor-artifacts coveralls tox
+
+script:
+  - tox -e lint,py35,py34,py33,pypy3,pypy,py27,py26,py25
+
+after_success:
+  - mv .coverage .coverage.travis
+  - appveyor-artifacts -mi download
+  - coverage combine
+  - coveralls
