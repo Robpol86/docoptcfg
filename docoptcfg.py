@@ -7,12 +7,96 @@ https://pypi.python.org/pypi/docoptcfg
 import os
 import sys
 
-from docopt import docopt, parse_defaults
+import docopt
 
 __all__ = ('docoptcfg',)
 __author__ = '@Robpol86'
 __license__ = 'MIT'
 __version__ = '0.0.1'
+
+
+def settable_options(doc, argv, ignore, options_first):
+    """Determine which options we can set, which ones are boolean, and which ones are repeatable.
+
+    All list items are option long names.
+
+    :param str doc: Docstring from docoptcfg().
+    :param iter argv: CLI arguments from docoptcfg().
+    :param iter ignore: Options to ignore from docoptcfg().
+    :param bool options_first: docopt argument from docoptcfg().
+
+    :return: Settable options, boolean options, and repeatable options.
+    :rtype: tuple
+    """
+    settable, booleans, repeatable = list(), list(), list()
+
+    # Determine which options are settable by docoptcfg and which ones are flags/booleans.
+    options = docopt.parse_defaults(doc)
+    parsed_argv = docopt.parse_argv(docopt.TokenStream(argv, docopt.DocoptExit), list(options), options_first)
+    overridden = [o.long for o in parsed_argv if hasattr(o, 'long')]
+    for option in options:
+        if option.long in overridden or (option.long in ignore or option.short in ignore):
+            continue
+        if option.argcount == 0:
+            booleans.append(option.long)
+        settable.append(option.long)
+
+    # Determine which options are repeatable.
+    if settable and '...' in doc:
+        pattern = docopt.parse_pattern(docopt.formal_usage(docopt.DocoptExit.usage), options)
+        for option in pattern.fix().flat():
+            if option.long not in settable:
+                continue  # Don't care about this if we can't set it.
+            if option.long in booleans and option.value == 0:
+                repeatable.append(option.long)
+            elif hasattr(option.value, '__iter__'):
+                repeatable.append(option.long)
+
+    return settable, booleans, repeatable
+
+
+def value_from_env(key, env_prefix, boolean, repeatable):
+    """Get value from environment variable(s).
+
+    :raise KeyError: If option not in environment variables.
+
+    :param str key: Option long name (e.g. --config).
+    :param str env_prefix: Variable name prefix from docoptcfg().
+    :param bool boolean: Is this a boolean/flag option?
+    :param bool repeatable: Is this option repeatable?
+
+    :return: Value to set in the defaults dict. May be int, iter, string, or bool.
+    """
+    env_name = '{0}{1}'.format(env_prefix, key[2:].replace('-', '_').upper())
+
+    # Handle repeatable non-boolean options (e.g. --file=file1.txt --file=file2.txt).
+    if repeatable and not boolean:
+        values = list()
+        if env_name in os.environ:  # Optional variable not ending with integer.
+            values.append(os.environ[env_name])
+        for i in range(99):
+            env_name_i = '{0}{1}'.format(env_name, i)  # Loop until variable with integer not found.
+            if env_name_i not in os.environ:
+                break
+            values.append(os.environ[env_name_i])
+        if not values:
+            raise KeyError(env_name)  # Nothing found.
+        return values
+
+    if env_name not in os.environ:
+        raise KeyError(env_name)
+
+    # Handle repeatable booleans.
+    if repeatable and boolean:
+        try:
+            return int(os.environ[env_name])
+        except (TypeError, ValueError):
+            return 0
+
+    # Handle the rest.
+    if boolean:
+        return os.environ[env_name].strip().lower() in ('true', '1')
+    return os.environ[env_name]
 
 
 def docoptcfg(doc, argv=None, env_prefix=None, config_option=None, ignore=None, *args, **kwargs):
@@ -29,39 +113,26 @@ def docoptcfg(doc, argv=None, env_prefix=None, config_option=None, ignore=None, 
     :return: Dictionary constructed by docopt and updated by docoptcfg.
     :rtype: dict
     """
-    docopt_dict = docopt(doc, argv, *args, **kwargs)
+    docopt_dict = docopt.docopt(doc, argv, *args, **kwargs)
     if env_prefix is None and config_option is None:
         return docopt_dict  # Nothing to do.
     if argv is None:
         argv = sys.argv[1:]
     if ignore is None:
         ignore = ('--help', '--version')
-
-    # Determine which options are settable by docoptcfg and which ones are flags/booleans.
-    settable = list()
-    booleans = list()
-    for option in parse_defaults(doc):
-        if option.long in argv or option.short in argv:
-            continue  # Overridden by command line arguments.
-        if option.long in ignore or option.short in ignore:
-            continue
-        if option.argcount == 0:
-            booleans.append(option.long)
-        settable.append(option.long)
+    settable, booleans, repeatable = settable_options(doc, argv, ignore, kwargs.get('options_first', False))
+    if not settable:
+        return docopt_dict  # Nothing to do.
 
     # Handle environment variables defaults.
     defaults = dict()
     if env_prefix is not None:
         for key in (k for k in docopt_dict if k in settable):
-            env_name = '{0}{1}'.format(env_prefix, key[2:].replace('-', '_').upper())
-            if env_name not in os.environ:
-                continue
-            if key in booleans:
-                defaults[key] = os.environ[env_name].strip().lower() in ('true', '1')
-            else:
-                defaults[key] = os.environ[env_name]
+            try:
+                defaults[key] = value_from_env(key, env_prefix, key in booleans, key in repeatable)
+            except KeyError:
+                pass
 
     # Merge dicts.
-    final_dict = docopt_dict.copy()
-    final_dict.update(defaults)
-    return final_dict
+    docopt_dict.update(defaults)
+    return docopt_dict

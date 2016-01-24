@@ -1,6 +1,6 @@
 after_success:
   - mv .coverage .coverage.travis
-  - appveyor-artifacts -mi download
+  - appveyor-artifacts -m download
   - coverage combine
   - coveralls
 

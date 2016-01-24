@@ -12,7 +12,7 @@ Usage:
     FlashAirMusic -V | --version
 
 Options:
-    -c FILE --config=FILE       Path YAML config file.
+    -c FILE --config=FILE       Path INI config file.
     -f FILE --ffmpeg-bin=FILE   File path to ffmpeg binary.
     -h --help                   Show this screen.
     -l FILE --log=FILE          Log to file. Will be rotated daily.
@@ -38,4 +38,30 @@ EXPECTED_FAM = {
     '--version': False,
     '--working-dir': None,
     'run': True,
+}
+
+
+DOCSTRING_MULTI = """\
+Test handling of ... options.
+
+Usage:
+    my_script [--config=FILE] [--flag]... [--key=VAL]...
+
+Options:
+    --config=FILE   Path INI config file.
+    --flag          Boolean value.
+    --key=VAL       Key value value.
+"""
+EXPECTED_MULTI = {
+    '--config': None,
+    '--flag': 0,
+    '--key': [],
+}
+
+
+DOCSTRING_NOT_MULTI = DOCSTRING_MULTI.replace('...', '')
+EXPECTED_NOT_MULTI = {
+    '--config': None,
+    '--flag': False,
+    '--key': None,
 }
