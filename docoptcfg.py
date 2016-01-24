@@ -18,7 +18,7 @@ __version__ = '0.0.1'
 def settable_options(doc, argv, ignore, options_first):
     """Determine which options we can set, which ones are boolean, and which ones are repeatable.
 
-    All list items are option long names.
+    All set items are option long names.
 
     :param str doc: Docstring from docoptcfg().
     :param iter argv: CLI arguments from docoptcfg().
@@ -28,7 +28,7 @@ def settable_options(doc, argv, ignore, options_first):
     :return: Settable options, boolean options, and repeatable options.
     :rtype: tuple
     """
-    settable, booleans, repeatable = list(), list(), list()
+    settable, booleans, repeatable = set(), set(), set()
 
     # Determine which options are settable by docoptcfg and which ones are flags/booleans.
     options = docopt.parse_defaults(doc)
@@ -38,8 +38,8 @@ def settable_options(doc, argv, ignore, options_first):
         if option.long in overridden or (option.long in ignore or option.short in ignore):
             continue
         if option.argcount == 0:
-            booleans.append(option.long)
-        settable.append(option.long)
+            booleans.add(option.long)
+        settable.add(option.long)
 
     # Determine which options are repeatable.
     if settable and '...' in doc:
@@ -48,15 +48,15 @@ def settable_options(doc, argv, ignore, options_first):
             if option.long not in settable:
                 continue  # Don't care about this if we can't set it.
             if option.long in booleans and option.value == 0:
-                repeatable.append(option.long)
+                repeatable.add(option.long)
             elif hasattr(option.value, '__iter__'):
-                repeatable.append(option.long)
+                repeatable.add(option.long)
 
     return settable, booleans, repeatable
 
 
-def value_from_env(key, env_prefix, boolean, repeatable):
-    """Get value from environment variable(s).
+def get_env(key, env_prefix, boolean, repeatable):
+    """Get one value from environment variable(s).
 
     :raise KeyError: If option not in environment variables.
 
@@ -95,8 +95,29 @@ def value_from_env(key, env_prefix, boolean, repeatable):
 
     # Handle the rest.
     if boolean:
-        return os.environ[env_name].strip().lower() in ('true', '1')
+        return os.environ[env_name].strip().lower() in ('true', 'yes', 'on', '1')
     return os.environ[env_name]
+
+
+def values_from_env(docopt_dict, env_prefix, settable, booleans, repeatable):
+    """Get all values from environment variables.
+
+    :param dict docopt_dict: Dictionary from docopt with environment variable defaults merged in by docoptcfg().
+    :param str env_prefix: Argument from docoptcfg().
+    :param iter settable: Option long names available to set by config file.
+    :param iter booleans: Option long names of boolean/flag types.
+    :param iter repeatable: Option long names of repeatable options.
+
+    :return: Settable values.
+    :rtype: dict
+    """
+    defaults_env = dict()
+    for key in (k for k in docopt_dict if k in settable):
+        try:
+            defaults_env[key] = get_env(key, env_prefix, key in booleans, key in repeatable)
+        except KeyError:
+            pass
+    return defaults_env
 
 
 def docoptcfg(doc, argv=None, env_prefix=None, config_option=None, ignore=None, *args, **kwargs):
@@ -125,14 +146,8 @@ def docoptcfg(doc, argv=None, env_prefix=None, config_option=None, ignore=None, 
         return docopt_dict  # Nothing to do.
 
     # Handle environment variables defaults.
-    defaults = dict()
     if env_prefix is not None:
-        for key in (k for k in docopt_dict if k in settable):
-            try:
-                defaults[key] = value_from_env(key, env_prefix, key in booleans, key in repeatable)
-            except KeyError:
-                pass
+        defaults = values_from_env(docopt_dict, env_prefix, settable, booleans, repeatable)
+        docopt_dict.update(defaults)
 
-    # Merge dicts.
-    docopt_dict.update(defaults)
     return docopt_dict

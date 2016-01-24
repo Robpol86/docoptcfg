@@ -14,6 +14,8 @@ from tests import DOCSTRING_FAM, DOCSTRING_MULTI, DOCSTRING_NOT_MULTI, EXPECTED_
     ('config.inf', 'true'),
     ('/tmp/config.ini', ' True'),
     (None, 'TRUE '),
+    (None, 'yes'),
+    (None, 'on'),
     (None, 'false'),
     (None, 'False'),
     (None, 'FALSE'),
@@ -37,7 +39,7 @@ def test(monkeypatch, set_config, set_verbose):
         expected['--config'] = str(set_config)
         monkeypatch.setenv('FAM_CONFIG', set_config)
     if set_verbose is not None:
-        if set_verbose.strip().lower() in ('true', '1'):
+        if set_verbose.strip().lower() in ('true', 'yes', 'on', '1'):
             expected['--verbose'] = True
         monkeypatch.setenv('FAM_VERBOSE', set_verbose)
 
