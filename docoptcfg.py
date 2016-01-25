@@ -7,12 +7,33 @@ https://pypi.python.org/pypi/docoptcfg
 import os
 import sys
 
+try:
+    from ConfigParser import ConfigParser, Error
+except ImportError:
+    from configparser import ConfigParser, Error
+
 import docopt
 
 __all__ = ('docoptcfg',)
 __author__ = '@Robpol86'
 __license__ = 'MIT'
 __version__ = '0.0.1'
+
+
+class DocoptcfgError(Exception):
+    """Error in docoptcfg usage by developer."""
+
+
+class DocoptcfgFileError(Exception):
+    """Error while reading or parsing config file."""
+
+    FILE_PATH = ''
+
+    def __init__(self, message, original_error=None):
+        """Constructor."""
+        self.message = message
+        self.original_error = original_error
+        super(DocoptcfgFileError, self).__init__(message, self.FILE_PATH, original_error)
 
 
 def settable_options(doc, argv, ignore, options_first):
@@ -25,13 +46,14 @@ def settable_options(doc, argv, ignore, options_first):
     :param iter ignore: Options to ignore from docoptcfg().
     :param bool options_first: docopt argument from docoptcfg().
 
-    :return: Settable options, boolean options, and repeatable options.
+    :return: Settable options, boolean options, repeatable options, and short to long option name mapping.
     :rtype: tuple
     """
-    settable, booleans, repeatable = set(), set(), set()
+    settable, booleans, repeatable, short_map = set(), set(), set(), dict()
 
     # Determine which options are settable by docoptcfg and which ones are flags/booleans.
     options = docopt.parse_defaults(doc)
+    short_map.update((o.short, o.long) for o in options)
     parsed_argv = docopt.parse_argv(docopt.TokenStream(argv, docopt.DocoptExit), list(options), options_first)
     overridden = [o.long for o in parsed_argv if hasattr(o, 'long')]
     for option in options:
@@ -52,7 +74,7 @@ def settable_options(doc, argv, ignore, options_first):
             elif hasattr(option.value, '__iter__'):
                 repeatable.add(option.long)
 
-    return settable, booleans, repeatable
+    return settable, booleans, repeatable, short_map
 
 
 def get_env(key, env_prefix, boolean, repeatable):
@@ -99,10 +121,9 @@ def get_env(key, env_prefix, boolean, repeatable):
     return os.environ[env_name]
 
 
-def values_from_env(docopt_dict, env_prefix, settable, booleans, repeatable):
+def values_from_env(env_prefix, settable, booleans, repeatable):
     """Get all values from environment variables.
 
-    :param dict docopt_dict: Dictionary from docopt with environment variable defaults merged in by docoptcfg().
     :param str env_prefix: Argument from docoptcfg().
     :param iter settable: Option long names available to set by config file.
     :param iter booleans: Option long names of boolean/flag types.
@@ -112,7 +133,7 @@ def values_from_env(docopt_dict, env_prefix, settable, booleans, repeatable):
     :rtype: dict
     """
     defaults_env = dict()
-    for key in (k for k in docopt_dict if k in settable):
+    for key in settable:
         try:
             defaults_env[key] = get_env(key, env_prefix, key in booleans, key in repeatable)
         except KeyError:
@@ -120,8 +141,99 @@ def values_from_env(docopt_dict, env_prefix, settable, booleans, repeatable):
     return defaults_env
 
 
+def get_opt(key, config, section, booleans, repeatable):
+    """Get one value from config file.
+
+    :raise DocoptcfgFileError: If an option is the wrong type.
+
+    :param str key: Option long name (e.g. --config).
+    :param ConfigParser config: ConfigParser instance with config file data already loaded.
+    :param str section: Section in config file to focus on.
+    :param iter booleans: Option long names of boolean/flag types.
+    :param iter repeatable: Option long names of repeatable options.
+
+    :return: Value to set in the defaults dict.
+    """
+    # Handle repeatable non-boolean options (e.g. --file=file1.txt --file=file2.txt).
+    if key in repeatable and key not in booleans:
+        return config.get(section, key[2:]).strip('\n').splitlines()
+
+    # Handle repeatable booleans.
+    if key in repeatable and key in booleans:
+        try:
+            return config.getint(section, key[2:])
+        except ValueError as exc:
+            raise DocoptcfgFileError('Repeatable boolean option "{0}" invalid.'.format(key[2:]), str(exc))
+
+    # Handle non-repeatable booleans.
+    if key in booleans:
+        try:
+            return config.getboolean(section, key[2:])
+        except ValueError as exc:
+            raise DocoptcfgFileError('Boolean option "{0}" invalid.'.format(key[2:]), str(exc))
+
+    # Handle the rest.
+    return str(config.get(section, key[2:]))
+
+
+def values_from_file(docopt_dict, config_option, settable, booleans, repeatable):
+    """Parse config file and read settable values.
+
+    Can be overridden by both command line arguments and environment variables.
+
+    :raise DocoptcfgError: If `config_option` isn't found in docstring.
+    :raise DocoptcfgFileError: On any error while trying to read and parse config file.
+
+    :param dict docopt_dict: Dictionary from docopt with environment variable defaults merged in by docoptcfg().
+    :param str config_option: Config option long name with file path as its value.
+    :param iter settable: Option long names available to set by config file.
+    :param iter booleans: Option long names of boolean/flag types.
+    :param iter repeatable: Option long names of repeatable options.
+
+    :return: Settable values.
+    :rtype: dict
+    """
+    section = docopt.DocoptExit.usage.split()[1]
+    settable = set(o for o in settable if o != config_option)
+    config = ConfigParser()
+    defaults = dict()
+
+    # Sanity checks.
+    if config_option not in docopt_dict:
+        raise DocoptcfgError
+    if docopt_dict[config_option] is None or not settable:
+        return defaults
+
+    # Read config file.
+    path = DocoptcfgFileError.FILE_PATH = docopt_dict[config_option]
+    try:
+        with open(path) as handle:
+            if hasattr(config, 'read_file'):
+                config.read_file(handle)
+            else:
+                getattr(config, 'readfp')(handle)
+    except Error as exc:
+        raise DocoptcfgFileError('Unable to parse config file.', str(exc))
+    except IOError as exc:
+        raise DocoptcfgFileError('Unable to read config file.', str(exc))
+
+    # Make sure section is in config file.
+    if not config.has_section(section):
+        raise DocoptcfgFileError('Section [{0}] not in config file.'.format(section))
+
+    # Parse config file.
+    for key in settable:
+        if config.has_option(section, key[2:]):
+            defaults[key] = get_opt(key, config, section, booleans, repeatable)
+
+    return defaults
+
+
 def docoptcfg(doc, argv=None, env_prefix=None, config_option=None, ignore=None, *args, **kwargs):
     """Pass most args/kwargs to docopt. Handle `env_prefix` and `config_option`.
+
+    :raise DocoptcfgError: If `config_option` isn't found in docstring.
+    :raise DocoptcfgFileError: On any error while trying to read and parse config file (if enabled).
 
     :param str doc: Docstring passed to docopt.
     :param iter argv: sys.argv[1:] passed to docopt.
@@ -141,13 +253,25 @@ def docoptcfg(doc, argv=None, env_prefix=None, config_option=None, ignore=None, 
         argv = sys.argv[1:]
     if ignore is None:
         ignore = ('--help', '--version')
-    settable, booleans, repeatable = settable_options(doc, argv, ignore, kwargs.get('options_first', False))
+    settable, booleans, repeatable, short_map = settable_options(doc, argv, ignore, kwargs.get('options_first', False))
     if not settable:
         return docopt_dict  # Nothing to do.
 
     # Handle environment variables defaults.
     if env_prefix is not None:
-        defaults = values_from_env(docopt_dict, env_prefix, settable, booleans, repeatable)
+        defaults = values_from_env(env_prefix, settable, booleans, repeatable)
+        settable -= set(defaults.keys())  # No longer settable by values_from_file().
+        docopt_dict.update(defaults)
+
+    # Handle config file defaults.
+    if config_option is not None:
+        defaults = values_from_file(
+            docopt_dict,
+            short_map.get(config_option, config_option),
+            settable,
+            booleans,
+            repeatable,
+        )
         docopt_dict.update(defaults)
 
     return docopt_dict
