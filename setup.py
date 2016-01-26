@@ -6,7 +6,7 @@ from __future__ import print_function
 import codecs
 import os
 
-from setuptools import find_packages, setup
+from setuptools import setup
 
 
 def readme():
@@ -58,8 +58,8 @@ setup(
     license='MIT',
     long_description=readme(),
     name='docoptcfg',
-    packages=find_packages(exclude=['tests']),
+    py_modules=['docoptcfg'],
     url='https://github.com/Robpol86/docoptcfg',
-    version='1.0.0',
+    version='1.0.1',
     zip_safe=True,
 )

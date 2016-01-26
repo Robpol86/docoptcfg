@@ -12,7 +12,7 @@ exclude_patterns = ['_build']
 master_doc = 'index'
 nitpicky = True
 project = 'docoptcfg'
-release = '1.0.0'
+release = '1.0.1'
 templates_path = ['_templates']
 version = release
 
