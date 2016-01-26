@@ -17,7 +17,7 @@ import docopt
 __all__ = ('docoptcfg',)
 __author__ = '@Robpol86'
 __license__ = 'MIT'
-__version__ = '0.0.1'
+__version__ = '1.0.0'
 
 
 class DocoptcfgError(Exception):

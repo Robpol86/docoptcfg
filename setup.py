@@ -26,7 +26,7 @@ def readme():
         getattr(handle, 'close', lambda: None)()
 
 
-KWARGS = dict(
+setup(
     author='@Robpol86',
     author_email='robpol86@gmail.com',
     classifiers=['Private :: Do Not Upload'],
@@ -38,10 +38,6 @@ KWARGS = dict(
     name='docoptcfg',
     packages=find_packages(exclude=['tests']),
     url='https://github.com/Robpol86/docoptcfg',
-    version='0.0.1',
+    version='1.0.0',
     zip_safe=True,
 )
-
-
-if __name__ == '__main__':
-    setup(**KWARGS)
