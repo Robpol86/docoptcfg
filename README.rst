@@ -13,7 +13,7 @@ use both at the same time:
 2. ``args = docoptcfg(__doc__, config_option='--config')``
 3. ``args = docoptcfg(__doc__, config_option='--config', env_prefix='MYAPP_')``
 
-Documentation for docoptcfg is available at https://docoptcfg.readthedocs.org
+📖 Full documentation: https://docoptcfg.readthedocs.org
 
 * Python 2.6, 2.7, PyPy, PyPy3, 3.3, 3.4, and 3.5 supported on Linux and OS X.
 * Python 2.7, 3.3, 3.4, and 3.5 supported on Windows (both 32 and 64 bit versions of Python).
@@ -34,10 +34,6 @@ Documentation for docoptcfg is available at https://docoptcfg.readthedocs.org
     :target: https://pypi.python.org/pypi/docoptcfg
     :alt: Latest Version
 
-.. image:: https://img.shields.io/pypi/dm/docoptcfg.svg?style=flat-square&label=PyPI%20Downloads
-    :target: https://pypi.python.org/pypi/docoptcfg
-    :alt: Downloads
-
 Quickstart
 ==========
 
@@ -46,8 +42,6 @@ Install:
 .. code:: bash
 
     pip install docoptcfg
-
-Documentation is available at https://docoptcfg.readthedocs.org
 
 Changelog
 =========

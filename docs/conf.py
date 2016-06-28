@@ -1,20 +1,22 @@
 """Sphinx configuration file."""
 
+import os
 import time
+from subprocess import check_output
 
 import sphinx_rtd_theme
 
+SETUP = os.path.join(os.path.dirname(__file__), '..', 'setup.py')
+
 
 # General configuration.
-author = '@Robpol86'
+author = check_output([SETUP, '--author']).strip().decode('ascii')
 copyright = '{}, {}'.format(time.strftime('%Y'), author)
-exclude_patterns = ['_build']
 master_doc = 'index'
 nitpicky = True
-project = 'docoptcfg'
-release = '1.0.1'
+project = check_output([SETUP, '--name']).strip().decode('ascii')
+release = version = check_output([SETUP, '--version']).strip().decode('ascii')
 templates_path = ['_templates']
-version = release
 
 
 # Options for HTML output.
