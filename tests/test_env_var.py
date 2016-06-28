@@ -212,5 +212,6 @@ def test_multi_required():
     """Test with repeatable non-option argument."""
     actual = docoptcfg(DOCSTRING_MULTI2, ['build', '/tmp/out', 'docs'], env_prefix='SVB_')
     expected = EXPECTED_MULTI2.copy()
+    # TODO env variables dont work on arguments, only options. Maybe change other docstrings and dont do multi2?
 
     assert actual == expected
