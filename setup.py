@@ -9,7 +9,7 @@ import os
 from setuptools import setup
 
 NAME = 'docoptcfg'
-VERSION = '1.0.1'
+VERSION = '1.0.2'
 
 
 def readme():
