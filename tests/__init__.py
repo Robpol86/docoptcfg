@@ -45,7 +45,7 @@ DOCSTRING_MULTI = """\
 Test handling of ... options.
 
 Usage:
-    my_script [--config=FILE] [--flag]... [--key=VAL]...
+    my_script [--config=FILE] [--flag]... [--key=VAL]... <pos>...
 
 Options:
     --config=FILE   Path INI config file.
@@ -56,6 +56,7 @@ EXPECTED_MULTI = {
     '--config': None,
     '--flag': 0,
     '--key': [],
+    '<pos>': ['1'],
 }
 
 
@@ -64,27 +65,4 @@ EXPECTED_NOT_MULTI = {
     '--config': None,
     '--flag': False,
     '--key': None,
-}
-
-
-DOCSTRING_MULTI2 = """\
-Test more handling of ... options.
-
-Usage:
-    my_script [options] build DESTINATION SOURCE...
-    my_script -h | --help
-    my_script -V | --version
-
-Options:
-    -h --help               Show this screen.
-    -v --verbose            Debug logging.
-    -V --version            Print sphinxcontrib-versioning version.
-"""
-EXPECTED_MULTI2 = {
-    '--help': False,
-    '--verbose': False,
-    '--version': False,
-    'build': True,
-    'DESTINATION': 'destination',
-    'SOURCE': ['source1', 'source2'],
 }

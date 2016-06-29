@@ -5,8 +5,7 @@ import os
 import pytest
 
 from docoptcfg import docoptcfg
-from tests import DOCSTRING_FAM, DOCSTRING_MULTI, DOCSTRING_MULTI2, DOCSTRING_NOT_MULTI
-from tests import EXPECTED_FAM, EXPECTED_MULTI, EXPECTED_MULTI2, EXPECTED_NOT_MULTI
+from tests import DOCSTRING_FAM, DOCSTRING_MULTI, DOCSTRING_NOT_MULTI, EXPECTED_FAM, EXPECTED_MULTI, EXPECTED_NOT_MULTI
 
 
 @pytest.mark.parametrize('set_config,set_verbose', [
@@ -206,12 +205,3 @@ def test_multi_a_lot(monkeypatch):
     assert actual == expected
     assert 'MULTI_KEY99' in os.environ
     assert '99' not in actual['--key']
-
-
-def test_multi_required():
-    """Test with repeatable non-option argument."""
-    actual = docoptcfg(DOCSTRING_MULTI2, ['build', '/tmp/out', 'docs'], env_prefix='SVB_')
-    expected = EXPECTED_MULTI2.copy()
-    # TODO env variables dont work on arguments, only options. Maybe change other docstrings and dont do multi2?
-
-    assert actual == expected
