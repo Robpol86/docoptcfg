@@ -48,6 +48,12 @@ Changelog
 
 This project adheres to `Semantic Versioning <http://semver.org/>`_.
 
+1.0.2 - 2016-06-28
+------------------
+
+Fixed
+    * Bug where docoptcfg failed to handle positional arguments with repeating args/opts.
+
 1.0.1 - 2016-01-25
 ------------------
 
