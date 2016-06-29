@@ -67,6 +67,8 @@ def settable_options(doc, argv, ignore, options_first):
     if settable and '...' in doc:
         pattern = docopt.parse_pattern(docopt.formal_usage(docopt.DocoptExit.usage), options)
         for option in pattern.fix().flat():
+            if not hasattr(option, 'long'):
+                continue  # Positional argument or sub-command.
             if option.long not in settable:
                 continue  # Don't care about this if we can't set it.
             if option.long in booleans and option.value == 0:

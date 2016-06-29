@@ -182,7 +182,7 @@ def test_multi_flag(monkeypatch, tmpdir, multi, set_flag):
     config_file = tmpdir.join('config.ini')
     config_file.write('[my_script]\n')
 
-    monkeypatch.setattr('sys.argv', ['pytest', '--config', str(config_file)])
+    monkeypatch.setattr('sys.argv', ['pytest', '1', '--config', str(config_file)])
     docstring = DOCSTRING_MULTI if multi else DOCSTRING_NOT_MULTI
     expected = EXPECTED_MULTI.copy() if multi else EXPECTED_NOT_MULTI.copy()
     expected['--config'] = str(config_file)
@@ -233,7 +233,7 @@ def test_multi(monkeypatch, tmpdir, multi):
         c
     """))
 
-    monkeypatch.setattr('sys.argv', ['pytest', '--flag', '--config', str(config_file)])
+    monkeypatch.setattr('sys.argv', ['pytest', '1', '--flag', '--config', str(config_file)])
     docstring = DOCSTRING_MULTI if multi else DOCSTRING_NOT_MULTI
     expected = EXPECTED_MULTI.copy() if multi else EXPECTED_NOT_MULTI.copy()
     expected['--config'] = str(config_file)

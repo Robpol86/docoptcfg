@@ -110,7 +110,7 @@ def test_multi_flag(monkeypatch, multi, set_flag):
     :param bool multi: Test with ... and without ... in docstring.
     :param str set_flag: Set MULTI_FLAG to this value if not None.
     """
-    monkeypatch.setattr('sys.argv', ['pytest'])
+    monkeypatch.setattr('sys.argv', ['pytest', '1'])
     docstring = DOCSTRING_MULTI if multi else DOCSTRING_NOT_MULTI
     expected = EXPECTED_MULTI.copy() if multi else EXPECTED_NOT_MULTI.copy()
 
@@ -142,7 +142,7 @@ def test_multi(monkeypatch, multi, set_key, set_key0, set_key1):
     :param str set_key0: Set MULTI_KEY0 to this value if not None.
     :param str set_key1: Set MULTI_KEY1 to this value if not None.
     """
-    monkeypatch.setattr('sys.argv', ['pytest', '--flag'])
+    monkeypatch.setattr('sys.argv', ['pytest', '1', '--flag'])
     docstring = DOCSTRING_MULTI if multi else DOCSTRING_NOT_MULTI
     expected = EXPECTED_MULTI.copy() if multi else EXPECTED_NOT_MULTI.copy()
     expected['--flag'] = 1 if multi else True
@@ -201,7 +201,7 @@ def test_multi_a_lot(monkeypatch):
         monkeypatch.setenv('MULTI_KEY{0}'.format(i), str(i))
         if i < 99:
             expected['--key'].append(str(i))
-    actual = docoptcfg(DOCSTRING_MULTI, [], ignore=('-h', '-V', '--flag'), env_prefix='MULTI_')
+    actual = docoptcfg(DOCSTRING_MULTI, ['1'], ignore=('-h', '-V', '--flag'), env_prefix='MULTI_')
     assert actual == expected
     assert 'MULTI_KEY99' in os.environ
     assert '99' not in actual['--key']

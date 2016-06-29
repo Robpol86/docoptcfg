@@ -45,7 +45,7 @@ DOCSTRING_MULTI = """\
 Test handling of ... options.
 
 Usage:
-    my_script [--config=FILE] [--flag]... [--key=VAL]... <pos>...
+    my_script <pos>... [--config=FILE] [--flag]... [--key=VAL]...
 
 Options:
     --config=FILE   Path INI config file.
@@ -65,4 +65,5 @@ EXPECTED_NOT_MULTI = {
     '--config': None,
     '--flag': False,
     '--key': None,
+    '<pos>': '1',
 }

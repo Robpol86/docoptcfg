@@ -29,7 +29,7 @@ def test_multi(monkeypatch, tmpdir):
     monkeypatch.setenv('FFMPEG_BIN', tmpdir.ensure('ffmpeg'))
     tmpdir.join('config.ini').write('[my_script]\nkey = \n    val1,\n    val2')
 
-    actual = docoptcfg(DOCSTRING_MULTI, ['--config', str(tmpdir.join('config.ini'))])
+    actual = docoptcfg(DOCSTRING_MULTI, ['1', '--config', str(tmpdir.join('config.ini'))])
     expected = EXPECTED_MULTI.copy()
     expected['--config'] = str(tmpdir.join('config.ini'))
 
