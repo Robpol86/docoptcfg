@@ -1,0 +1,373 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Configuration Files &mdash; docoptcfg</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="docoptcfg" href="index.html"/>
+        <link rel="prev" title="Environment Variables" href="env_vars.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> docoptcfg
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#the-basics">The Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#exception-handling">Exception Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="#docoptcfgerror">DocoptcfgError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="#docoptcfgfileerror">DocoptcfgFileError</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="#section-name">Section Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#short-names">Short Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flags-booleans">Flags/Booleans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#repeating-options">Repeating Options</a></li>
+</ul>
+</li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">docoptcfg</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Configuration Files</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="_sources/config_files.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="v1.0.2/config_files.html"><b>Warning:</b> This document is for the development version of docoptcfg. The latest version is v1.0.2.</a></p>
+
+  <div class="section" id="configuration-files">
+<span id="config-file"></span><h1>Configuration Files<a class="headerlink" href="#configuration-files" title="Permalink to this headline">¶</a></h1>
+<p>When configuration file support is enabled (by specifying <code class="docutils literal"><span class="pre">config_option</span></code> in docoptcfg), Python&#8217;s native
+<a class="reference external" href="https://docs.python.org/3/library/configparser.html">configparser</a> module is used to read configuration files. That means only INI/INF-type config files are supported.</p>
+<p>An example configuration file is:</p>
+<div class="code ini highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">my_script</span><span class="p">]</span>
+<span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="o">=</span> <span class="n">file_config</span><span class="o">.</span><span class="n">log</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">threads</span> <span class="o">=</span> <span class="mi">11</span>
+</pre></div>
+</div>
+<p>Below are a few things to keep in mind.</p>
+<div class="section" id="the-basics">
+<h2>The Basics<a class="headerlink" href="#the-basics" title="Permalink to this headline">¶</a></h2>
+<p>Let&#8217;s get some basics out of the way. When calling <code class="docutils literal"><span class="pre">docoptcfg()</span></code> with the <code class="docutils literal"><span class="pre">config_option</span></code> argument, the value of
+that argument should be one of the options defined in your docstring. For example if we&#8217;ve got this docstring:</p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="n">My</span> <span class="n">little</span> <span class="n">script</span><span class="o">.</span>
+
+<span class="n">Usage</span><span class="p">:</span>
+    <span class="n">my_script</span> <span class="p">[</span><span class="n">options</span><span class="p">]</span>
+
+<span class="n">Options</span><span class="p">:</span>
+    <span class="o">-</span><span class="n">c</span> <span class="n">FILE</span> <span class="o">--</span><span class="n">config</span><span class="o">=</span><span class="n">FILE</span>       <span class="n">Path</span> <span class="n">to</span> <span class="n">INI</span> <span class="n">config</span> <span class="n">file</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">l</span> <span class="n">FILE</span> <span class="o">--</span><span class="n">log</span><span class="o">-</span><span class="n">file</span><span class="o">=</span><span class="n">FILE</span>     <span class="n">Write</span> <span class="n">to</span> <span class="n">this</span> <span class="n">log</span> <span class="n">file</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">r</span> <span class="n">NUM</span> <span class="o">--</span><span class="n">runtime</span><span class="o">=</span><span class="n">NUM</span>        <span class="n">How</span> <span class="n">long</span> <span class="n">before</span> <span class="n">exiting</span><span class="o">.</span>
+    <span class="o">-</span><span class="n">t</span> <span class="n">NUM</span> <span class="o">--</span><span class="n">threads</span><span class="o">=</span><span class="n">NUM</span>        <span class="n">Number</span> <span class="n">of</span> <span class="n">threads</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>Then <code class="docutils literal"><span class="pre">config_option</span></code> should be set to one of those, such as <code class="docutils literal"><span class="pre">config_option='--config'</span></code>. You&#8217;ll need the hyphens.</p>
+<p>Another thing to point out is that docoptcfg ignores re-defining configuration files within configuration files. So if
+your end user has this:</p>
+<div class="code ini highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">my_script</span><span class="p">]</span>
+<span class="n">config</span> <span class="o">=</span> <span class="n">new_config</span><span class="o">.</span><span class="n">ini</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="mi">10</span>
+</pre></div>
+</div>
+<p>Then docoptcfg will just ignore the config setting. It will read the rest of the config file like normal.</p>
+<p>Lastly, you can combine configuration files and environment variables. So your users can define a configuration file
+with <code class="docutils literal"><span class="pre">PREFIX_CONFIG=/path/to/config.ini</span></code> instead of through the command line.</p>
+</div>
+<div class="section" id="exception-handling">
+<h2>Exception Handling<a class="headerlink" href="#exception-handling" title="Permalink to this headline">¶</a></h2>
+<p>Unlike environment variables which don&#8217;t throw any exceptions, configuration file handling may raise two exceptions:</p>
+<ul class="simple">
+<li><code class="docutils literal"><span class="pre">docoptcfg.DocoptcfgError</span></code></li>
+<li><code class="docutils literal"><span class="pre">docoptcfg.DocoptcfgFileError</span></code></li>
+</ul>
+<div class="section" id="docoptcfgerror">
+<h3>DocoptcfgError<a class="headerlink" href="#docoptcfgerror" title="Permalink to this headline">¶</a></h3>
+<p>This one&#8217;s easy. It&#8217;s only raised under one scenario: when you (the developer) specifies the wrong option for
+<code class="docutils literal"><span class="pre">config_option</span></code> when calling docoptcfg(). With the above example docstring, if you do
+<code class="docutils literal"><span class="pre">docoptcfg(__doc__,</span> <span class="pre">config_option='--i-dont-exist')</span></code> then <code class="docutils literal"><span class="pre">DocoptcfgError</span></code> will be raised.</p>
+</div>
+<div class="section" id="docoptcfgfileerror">
+<h3>DocoptcfgFileError<a class="headerlink" href="#docoptcfgfileerror" title="Permalink to this headline">¶</a></h3>
+<p>This one may be raised by a mistake on your end-users&#8217; part. Be sure to handle this. This is raised on any error that
+may come up while attempting to read and parse a config file. Situations include:</p>
+<ul class="simple">
+<li>File not found</li>
+<li>Permissions</li>
+<li>Corrupt/binary data instead of text data</li>
+<li>Malformed section formatting</li>
+<li>Missing section</li>
+<li>Non-boolean value for boolean options (valid values are listed in the <a class="reference external" href="https://docs.python.org/3/library/configparser.html#supported-datatypes">configparser documentation</a>)</li>
+</ul>
+<p>A simple way to handle this is:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="k">try</span><span class="p">:</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">docoptcfg</span><span class="p">(</span><span class="n">__doc__</span><span class="p">,</span> <span class="n">config_option</span><span class="o">=</span><span class="s1">&#39;--config&#39;</span><span class="p">)</span>
+<span class="k">except</span> <span class="n">DocoptcfgFileError</span> <span class="k">as</span> <span class="n">exc</span><span class="p">:</span>
+    <span class="n">log</span><span class="o">.</span><span class="n">error</span><span class="p">(</span><span class="s1">&#39;Failed reading: </span><span class="si">%s</span><span class="s1">&#39;</span><span class="p">,</span> <span class="nb">str</span><span class="p">(</span><span class="n">exc</span><span class="p">))</span>
+    <span class="n">CONFIG</span> <span class="o">=</span> <span class="n">docoptcfg</span><span class="p">(</span><span class="n">__doc__</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+</div>
+<div class="section" id="section-name">
+<h2>Section Name<a class="headerlink" href="#section-name" title="Permalink to this headline">¶</a></h2>
+<p>docoptcfg will only focus on one section in the config file. The name of that section must match the name of your
+program specified in your docstring. The example above has the section named &#8220;my_script&#8221;. Therefore in your docstring
+the first word after &#8220;Usage:&#8221; should match.</p>
+</div>
+<div class="section" id="short-names">
+<h2>Short Names<a class="headerlink" href="#short-names" title="Permalink to this headline">¶</a></h2>
+<p>Like environment variables, only long option names are used. In the example above we&#8217;ve got <code class="docutils literal"><span class="pre">-l</span> <span class="pre">FILE</span> <span class="pre">--log-file=FILE</span></code>
+but docoptcfg will only look for <code class="docutils literal"><span class="pre">log-file</span></code>.</p>
+</div>
+<div class="section" id="flags-booleans">
+<h2>Flags/Booleans<a class="headerlink" href="#flags-booleans" title="Permalink to this headline">¶</a></h2>
+<p>Flags in config files must be yes, no, on, off, true, false, 1, or 0. More info in the <a class="reference external" href="https://docs.python.org/3/library/configparser.html#supported-datatypes">configparser documentation</a>.</p>
+</div>
+<div class="section" id="repeating-options">
+<h2>Repeating Options<a class="headerlink" href="#repeating-options" title="Permalink to this headline">¶</a></h2>
+<p>Docopt supports repeating options by specifying an ellipses in the docstring. An example:</p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="n">Test</span> <span class="n">handling</span> <span class="n">of</span> <span class="o">...</span> <span class="n">options</span><span class="o">.</span>
+
+<span class="n">Usage</span><span class="p">:</span>
+    <span class="n">my_script</span> <span class="p">[</span><span class="o">--</span><span class="n">config</span><span class="o">=</span><span class="n">FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">flag</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="o">--</span><span class="n">key</span><span class="o">=</span><span class="n">VAL</span><span class="p">]</span><span class="o">...</span>
+
+<span class="n">Options</span><span class="p">:</span>
+    <span class="o">--</span><span class="n">config</span><span class="o">=</span><span class="n">FILE</span>   <span class="n">Path</span> <span class="n">INI</span> <span class="n">config</span> <span class="n">file</span><span class="o">.</span>
+    <span class="o">--</span><span class="n">flag</span>          <span class="n">Boolean</span> <span class="n">value</span><span class="o">.</span>
+    <span class="o">--</span><span class="n">key</span><span class="o">=</span><span class="n">VAL</span>       <span class="n">Key</span> <span class="n">value</span> <span class="n">value</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In this case, docopt gives you integers for flags (instead of booleans) and lists for key/value options (instead of
+strings).</p>
+<p>docoptcfg supports this in configuration files as well:</p>
+<ol class="arabic simple">
+<li>Configuration file options for flags are expected to be integers.</li>
+<li>Configuration file options for key/values can be delimited by newlines.</li>
+</ol>
+<p>Here&#8217;s a quick example:</p>
+<div class="code ini highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">my_script</span><span class="p">]</span>
+<span class="n">key</span> <span class="o">=</span>
+    <span class="n">a</span>
+    <span class="n">b</span>
+    <span class="n">c</span>
+<span class="n">flag</span> <span class="o">=</span> <span class="mi">2</span>
+</pre></div>
+</div>
+<p>The above is the equivalent of <code class="docutils literal"><span class="pre">my_script</span> <span class="pre">--key=a</span> <span class="pre">--key=b</span> <span class="pre">--key=c</span> <span class="pre">--flag</span> <span class="pre">--flag</span></code>.</p>
+</div>
+</div>
+
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+      
+        <a href="env_vars.html" class="btn btn-neutral" title="Environment Variables" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, @Robpol86.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="v1.0.2/config_files.html">v1.0.2</a></dd>
+            <dd><a href="v1.0.1/config_files.html">v1.0.1</a></dd>
+            <dd><a href="v1.0.0/config_files.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="stage/config_files.html">stage</a></dd>
+            <dd><a href="master/config_files.html">master</a></dd>
+            <dd><a href="fix_repeating/config_files.html">fix_repeating</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

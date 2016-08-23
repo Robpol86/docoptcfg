@@ -1,0 +1,321 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-82627369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>Environment Variables &mdash; docoptcfg</title>
+  
+
+  
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="docoptcfg" href="index.html"/>
+        <link rel="next" title="Configuration Files" href="config_files.html"/>
+        <link rel="prev" title="Usage and API" href="usage.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="index.html" class="icon icon-home"> docoptcfg
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Environment Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#short-names">Short Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#hyphens">Hyphens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#flags-booleans">Flags/Booleans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#repeating-options">Repeating Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config_files.html">Configuration Files</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="index.html">docoptcfg</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="index.html">Docs</a> &raquo;</li>
+      
+    <li>Environment Variables</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          
+            <a href="https://github.com/Robpol86/docoptcfg/blob/stage/docs/env_vars.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../v1.0.2/env_vars.html"><b>Warning:</b> This document is for the development version of docoptcfg. The latest version is v1.0.2.</a></p>
+
+  <div class="section" id="environment-variables">
+<span id="env-vars"></span><h1>Environment Variables<a class="headerlink" href="#environment-variables" title="Permalink to this headline">¶</a></h1>
+<p>When environment variables are enabled (by specifying <code class="docutils literal"><span class="pre">env_prefix</span></code> in docoptcfg), there are a few things to keep in
+mind.</p>
+<div class="section" id="short-names">
+<h2>Short Names<a class="headerlink" href="#short-names" title="Permalink to this headline">¶</a></h2>
+<p>If you&#8217;ve got something like <code class="docutils literal"><span class="pre">-c</span> <span class="pre">FILE</span> <span class="pre">--config=FILE</span></code> in your docstring, only the <code class="docutils literal"><span class="pre">--config</span></code> part is relevant. Short
+option names are ignored in environment variables. So you can&#8217;t have something like <code class="docutils literal"><span class="pre">PREFIX_C</span></code>. Your end users will
+need to use <code class="docutils literal"><span class="pre">PREFIX_CONFIG</span></code> instead.</p>
+</div>
+<div class="section" id="hyphens">
+<h2>Hyphens<a class="headerlink" href="#hyphens" title="Permalink to this headline">¶</a></h2>
+<p>Hyphens in docopt options are underscores in environment variables (e.g. <code class="docutils literal"><span class="pre">--mac-addr</span></code> is <code class="docutils literal"><span class="pre">PREFIX_MAC_ADDR</span></code>).</p>
+</div>
+<div class="section" id="flags-booleans">
+<h2>Flags/Booleans<a class="headerlink" href="#flags-booleans" title="Permalink to this headline">¶</a></h2>
+<p>Flags in docopt options  are handled in environment variables as booleans as well. Users will need to set their
+environment variable to <code class="docutils literal"><span class="pre">true</span></code>, <code class="docutils literal"><span class="pre">yes</span></code>, <code class="docutils literal"><span class="pre">on</span></code>, or <code class="docutils literal"><span class="pre">1</span></code>. These are case insensitive so <code class="docutils literal"><span class="pre">TRUE</span></code> works too. Those
+values are interpreted as boolean True while anything else is considered False.</p>
+<p>Environment variables set but empty are considered False as well.</p>
+<p>So if you&#8217;ve got <code class="docutils literal"><span class="pre">--verbose</span></code> and the user has <code class="docutils literal"><span class="pre">PREFIX_VERBOSE=true</span></code>, then you&#8217;ll have a True value in your returned
+dictionary.</p>
+</div>
+<div class="section" id="repeating-options">
+<h2>Repeating Options<a class="headerlink" href="#repeating-options" title="Permalink to this headline">¶</a></h2>
+<p>Docopt supports repeating options by specifying an ellipses in the docstring. An example:</p>
+<div class="code text highlight-default"><div class="highlight"><pre><span></span><span class="n">Test</span> <span class="n">handling</span> <span class="n">of</span> <span class="o">...</span> <span class="n">options</span><span class="o">.</span>
+
+<span class="n">Usage</span><span class="p">:</span>
+    <span class="n">my_script</span> <span class="p">[</span><span class="o">--</span><span class="n">config</span><span class="o">=</span><span class="n">FILE</span><span class="p">]</span> <span class="p">[</span><span class="o">--</span><span class="n">flag</span><span class="p">]</span><span class="o">...</span> <span class="p">[</span><span class="o">--</span><span class="n">key</span><span class="o">=</span><span class="n">VAL</span><span class="p">]</span><span class="o">...</span>
+
+<span class="n">Options</span><span class="p">:</span>
+    <span class="o">--</span><span class="n">config</span><span class="o">=</span><span class="n">FILE</span>   <span class="n">Path</span> <span class="n">INI</span> <span class="n">config</span> <span class="n">file</span><span class="o">.</span>
+    <span class="o">--</span><span class="n">flag</span>          <span class="n">Boolean</span> <span class="n">value</span><span class="o">.</span>
+    <span class="o">--</span><span class="n">key</span><span class="o">=</span><span class="n">VAL</span>       <span class="n">Key</span> <span class="n">value</span> <span class="n">value</span><span class="o">.</span>
+</pre></div>
+</div>
+<p>In this case, docopt gives you integers for flags (instead of booleans) and lists for key/value options (instead of
+strings).</p>
+<p>docoptcfg supports this in environment variables as well:</p>
+<ol class="arabic simple">
+<li>Environment variables for flags are expected to be integers.</li>
+<li>Environment variables for key/values can be specified multiple times by appending integers from 0 or 1.</li>
+</ol>
+<p>For example, the end user may specify <code class="docutils literal"><span class="pre">PREFIX_FLAG=2</span></code> to mimic <code class="docutils literal"><span class="pre">--flag</span> <span class="pre">--flag</span></code>.</p>
+<p>For key/value options they can set <code class="docutils literal"><span class="pre">PREFIX_KEY=one</span></code>, <code class="docutils literal"><span class="pre">PREFIX_KEY0=two</span></code>, and so on (up to 99 is supported). They can
+also start at 1: <code class="docutils literal"><span class="pre">PREFIX_KEY=one</span></code>, <code class="docutils literal"><span class="pre">PREFIX_KEY1=two</span></code>, <code class="docutils literal"><span class="pre">PREFIX_KEY2=three</span></code>. They can even skip the integer-less
+variable and do <code class="docutils literal"><span class="pre">PREFIX_KEY0=one</span></code>, <code class="docutils literal"><span class="pre">PREFIX_KEY1=two</span></code> and so on. The first variable must start either integer-less or
+with 0.</p>
+<p>docoptcfg will keep looking for increments until it can&#8217;t find one. So if the user sets <code class="docutils literal"><span class="pre">PREFIX_KEY0=one</span></code>,
+<code class="docutils literal"><span class="pre">PREFIX_KEY1=two</span></code>, and <code class="docutils literal"><span class="pre">PREFIX_KEY3=three</span></code>, docoptcfg will only return <code class="docutils literal"><span class="pre">['one',</span> <span class="pre">'two']</span></code>.</p>
+</div>
+</div>
+
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="config_files.html" class="btn btn-neutral float-right" title="Configuration Files" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+        <a href="usage.html" class="btn btn-neutral" title="Usage and API" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, @Robpol86.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: stage
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.2/env_vars.html">v1.0.2</a></dd>
+            <dd><a href="../v1.0.1/env_vars.html">v1.0.1</a></dd>
+            <dd><a href="../v1.0.0/env_vars.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="env_vars.html">stage</a></dd>
+            <dd><a href="../master/env_vars.html">master</a></dd>
+            <dd><a href="../fix_repeating/env_vars.html">fix_repeating</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  false
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>

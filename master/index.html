@@ -1,0 +1,352 @@
+
+
+
+<!DOCTYPE html>
+<!--[if IE 8]><html class="no-js lt-ie9" lang="en" > <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
+<head>
+  <meta charset="utf-8">
+  
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <title>docoptcfg &mdash; docoptcfg</title>
+  
+
+  
+  
+
+  
+
+  
+  
+    
+
+  
+
+  
+  
+    <link rel="stylesheet" href="_static/css/theme.css" type="text/css" />
+  
+
+  
+    <link rel="stylesheet" href="_static/banner.css" type="text/css" />
+  
+
+  
+    <link rel="top" title="docoptcfg" href="#"/>
+        <link rel="next" title="Usage and API" href="usage.html"/> 
+
+  
+  <script src="_static/js/modernizr.min.js"></script>
+
+</head>
+
+<body class="wy-body-for-nav" role="document">
+
+   
+  <div class="wy-grid-for-nav">
+
+    
+    <nav data-toggle="wy-nav-shift" class="wy-nav-side">
+      <div class="wy-side-scroll">
+        <div class="wy-side-nav-search">
+          
+
+          
+            <a href="#" class="icon icon-home"> docoptcfg
+          
+
+          
+          </a>
+
+          
+            
+            
+              <div class="version">
+                1.0.2
+              </div>
+            
+          
+
+          
+<div role="search">
+  <form id="rtd-search-form" class="wy-form" action="search.html" method="get">
+    <input type="text" name="q" placeholder="Search docs" />
+    <input type="hidden" name="check_keywords" value="yes" />
+    <input type="hidden" name="area" value="default" />
+  </form>
+</div>
+
+          
+        </div>
+
+        <div class="wy-menu wy-menu-vertical" data-spy="affix" role="navigation" aria-label="main navigation">
+          
+            
+            
+                <ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a></li>
+<li class="toctree-l1"><a class="reference internal" href="config_files.html">Configuration Files</a></li>
+</ul>
+
+            
+          
+        </div>
+      </div>
+    </nav>
+
+    <section data-toggle="wy-nav-shift" class="wy-nav-content-wrap">
+
+      
+      <nav class="wy-nav-top" role="navigation" aria-label="top navigation">
+        <i data-toggle="wy-nav-top" class="fa fa-bars"></i>
+        <a href="#">docoptcfg</a>
+      </nav>
+
+
+      
+      <div class="wy-nav-content">
+        <div class="rst-content">
+          
+
+ 
+
+
+
+
+
+
+
+<div role="navigation" aria-label="breadcrumbs navigation">
+  <ul class="wy-breadcrumbs">
+    <li><a href="#">Docs</a> &raquo;</li>
+      
+    <li>docoptcfg</li>
+    <li class="wy-breadcrumbs-aside">
+      
+          
+          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+        
+      
+    </li>
+  </ul>
+  <hr/>
+</div>
+          <div role="main" class="document" itemscope="itemscope" itemtype="http://schema.org/Article">
+           <div itemprop="articleBody">
+            
+  
+
+
+    
+    
+
+
+
+    <p class="scv-banner scv-sphinx_rtd_theme"><a href="../v1.0.2/index.html"><b>Warning:</b> This document is for the development version of docoptcfg. The latest version is v1.0.2.</a></p>
+
+  <div class="section" id="docoptcfg">
+<h1>docoptcfg<a class="headerlink" href="#docoptcfg" title="Permalink to this headline">¶</a></h1>
+<p>Love using <a class="reference external" href="http://docopt.org/">docopt</a> over argparse or <a class="reference external" href="http://click.pocoo.org/">Click</a>? Wish it took care of
+environment variables and/or config files?</p>
+<p>docoptcfg is a wrapper for docopt which handles reading configuration data from environment variables and/or an INI/INF
+configuration file. You can (1) enable only the environment variable part, (2) only the config file part, (3) or use
+both at the same time:</p>
+<ol class="arabic simple">
+<li><code class="docutils literal"><span class="pre">args</span> <span class="pre">=</span> <span class="pre">docoptcfg(__doc__,</span> <span class="pre">env_prefix='MYAPP_')</span></code></li>
+<li><code class="docutils literal"><span class="pre">args</span> <span class="pre">=</span> <span class="pre">docoptcfg(__doc__,</span> <span class="pre">config_option='--config')</span></code></li>
+<li><code class="docutils literal"><span class="pre">args</span> <span class="pre">=</span> <span class="pre">docoptcfg(__doc__,</span> <span class="pre">config_option='--config',</span> <span class="pre">env_prefix='MYAPP_')</span></code></li>
+</ol>
+<div class="section" id="compatibility">
+<h2>Compatibility<a class="headerlink" href="#compatibility" title="Permalink to this headline">¶</a></h2>
+<p>docoptcfg is supported on Linux, OS X, and Windows:</p>
+<ul class="simple">
+<li>Python 2.6, 2.7, PyPy, PyPy3, 3.3, 3.4, and 3.5 supported on Linux and OS X.</li>
+<li>Python 2.7, 3.3, 3.4, and 3.5 supported on Windows (both 32 and 64 bit versions of Python).</li>
+</ul>
+</div>
+<div class="section" id="simple-example">
+<h2>Simple Example<a class="headerlink" href="#simple-example" title="Permalink to this headline">¶</a></h2>
+<p>Here&#8217;s a simple example of what you can do with docoptcfg. Think of docoptcfg as using configuration files and/or
+environment variables to set defaults. Command line arguments will always trump other sources. Environment variables
+also trump config files. The order of operations from low to high priority is: <strong>config file -&gt; env var -&gt; args.</strong></p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="ch">#!/usr/bin/env python</span>
+<span class="sd">&quot;&quot;&quot;My little script.</span>
+
+<span class="sd">Usage:</span>
+<span class="sd">    my_script [options]</span>
+
+<span class="sd">Options:</span>
+<span class="sd">    -c FILE --config=FILE       Path to INI config file.</span>
+<span class="sd">    -l FILE --log-file=FILE     Write to this log file.</span>
+<span class="sd">    -r NUM --runtime=NUM        How long before exiting.</span>
+<span class="sd">    -t NUM --threads=NUM        Number of threads.</span>
+<span class="sd">&quot;&quot;&quot;</span>
+
+<span class="kn">from</span> <span class="nn">docoptcfg</span> <span class="k">import</span> <span class="n">docoptcfg</span>
+
+<span class="nb">print</span> <span class="n">docoptcfg</span><span class="p">(</span><span class="n">__doc__</span><span class="p">,</span> <span class="n">env_prefix</span><span class="o">=</span><span class="s1">&#39;MYAPP_&#39;</span><span class="p">,</span> <span class="n">config_option</span><span class="o">=</span><span class="s1">&#39;--config&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<p>Now let&#8217;s create a configuration file and name it config.ini:</p>
+<div class="code ini highlight-default"><div class="highlight"><pre><span></span><span class="p">[</span><span class="n">my_script</span><span class="p">]</span>
+<span class="n">log</span><span class="o">-</span><span class="n">file</span> <span class="o">=</span> <span class="n">file_config</span><span class="o">.</span><span class="n">log</span>
+<span class="n">runtime</span> <span class="o">=</span> <span class="mi">10</span>
+<span class="n">threads</span> <span class="o">=</span> <span class="mi">11</span>
+</pre></div>
+</div>
+<p>And finally we run it like this:</p>
+<div class="code bash highlight-default"><div class="highlight"><pre><span></span><span class="n">export</span> <span class="n">MYAPP_LOG_FILE</span><span class="o">=</span><span class="n">file_env</span><span class="o">.</span><span class="n">log</span>
+<span class="n">export</span> <span class="n">MYAPP_RUNTIME</span><span class="o">=</span><span class="mi">20</span>
+<span class="o">./</span><span class="n">my_script</span><span class="o">.</span><span class="n">py</span> <span class="o">-</span><span class="n">c</span> <span class="n">config</span><span class="o">.</span><span class="n">ini</span> <span class="o">-</span><span class="n">r</span> <span class="mi">30</span>
+</pre></div>
+</div>
+<p>Our result is:</p>
+<div class="code python highlight-default"><div class="highlight"><pre><span></span><span class="p">{</span>
+    <span class="s1">&#39;--config&#39;</span><span class="p">:</span> <span class="s1">&#39;config.ini&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;--log-file&#39;</span><span class="p">:</span> <span class="s1">&#39;file_env.log&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;--runtime&#39;</span><span class="p">:</span> <span class="s1">&#39;30&#39;</span><span class="p">,</span>
+    <span class="s1">&#39;--threads&#39;</span><span class="p">:</span> <span class="s1">&#39;11&#39;</span><span class="p">,</span>
+<span class="p">}</span>
+</pre></div>
+</div>
+</div>
+<div class="section" id="project-links">
+<h2>Project Links<a class="headerlink" href="#project-links" title="Permalink to this headline">¶</a></h2>
+<ul class="simple">
+<li>Documentation: <a class="reference external" href="https://docoptcfg.readthedocs.org">https://docoptcfg.readthedocs.org</a></li>
+<li>Source code: <a class="reference external" href="https://github.com/Robpol86/docoptcfg">https://github.com/Robpol86/docoptcfg</a></li>
+<li>PyPI homepage: <a class="reference external" href="https://pypi.python.org/pypi/docoptcfg">https://pypi.python.org/pypi/docoptcfg</a></li>
+</ul>
+</div>
+<div class="section" id="contents">
+<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
+<div class="toctree-wrapper compound">
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
+<li class="toctree-l2"><a class="reference internal" href="usage.html#keyword-arguments">Keyword Arguments</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#doc-string">doc (string)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#argv-list">argv (list)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#env-prefix-string">env_prefix (string)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#config-option-string">config_option (string)</a></li>
+<li class="toctree-l3"><a class="reference internal" href="usage.html#ignore-list">ignore (list)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="env_vars.html#short-names">Short Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env_vars.html#hyphens">Hyphens</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env_vars.html#flags-booleans">Flags/Booleans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="env_vars.html#repeating-options">Repeating Options</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="config_files.html">Configuration Files</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html#the-basics">The Basics</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html#exception-handling">Exception Handling</a><ul>
+<li class="toctree-l3"><a class="reference internal" href="config_files.html#docoptcfgerror">DocoptcfgError</a></li>
+<li class="toctree-l3"><a class="reference internal" href="config_files.html#docoptcfgfileerror">DocoptcfgFileError</a></li>
+</ul>
+</li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html#section-name">Section Name</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html#short-names">Short Names</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html#flags-booleans">Flags/Booleans</a></li>
+<li class="toctree-l2"><a class="reference internal" href="config_files.html#repeating-options">Repeating Options</a></li>
+</ul>
+</li>
+</ul>
+</div>
+</div>
+</div>
+
+
+
+           </div>
+          </div>
+          <footer>
+  
+    <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
+      
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage and API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
+      
+    </div>
+  
+
+  <hr/>
+
+  <div role="contentinfo">
+    <p>
+        &copy; Copyright 2016, @Robpol86.
+
+    </p>
+  </div>
+  Built with <a href="http://sphinx-doc.org/">Sphinx</a> using a <a href="https://github.com/snide/sphinx_rtd_theme">theme</a> provided by <a href="https://readthedocs.org">Read the Docs</a>. 
+
+</footer>
+
+        </div>
+      </div>
+
+    </section>
+
+  </div>
+  
+<div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
+    <span class="rst-current-version" data-toggle="rst-current-version">
+        <span class="fa fa-book"> Other Versions</span>
+        v: master
+        <span class="fa fa-caret-down"></span>
+    </span>
+    <div class="rst-other-versions">
+        <dl>
+            <dt>Tags</dt>
+            <dd><a href="../v1.0.2/index.html">v1.0.2</a></dd>
+            <dd><a href="../v1.0.1/index.html">v1.0.1</a></dd>
+            <dd><a href="../v1.0.0/index.html">v1.0.0</a></dd>
+        </dl>
+        <dl>
+            <dt>Branches</dt>
+            <dd><a href="../stage/index.html">stage</a></dd>
+            <dd><a href="index.html">master</a></dd>
+            <dd><a href="../fix_repeating/index.html">fix_repeating</a></dd>
+        </dl>
+    </div>
+</div>
+
+
+  
+
+    <script type="text/javascript">
+        var DOCUMENTATION_OPTIONS = {
+            URL_ROOT:'./',
+            VERSION:'1.0.2',
+            COLLAPSE_INDEX:false,
+            FILE_SUFFIX:'.html',
+            HAS_SOURCE:  true
+        };
+    </script>
+      <script type="text/javascript" src="_static/jquery.js"></script>
+      <script type="text/javascript" src="_static/underscore.js"></script>
+      <script type="text/javascript" src="_static/doctools.js"></script>
+
+  
+
+  
+  
+    <script type="text/javascript" src="_static/js/theme.js"></script>
+  
+
+  
+  
+  <script type="text/javascript">
+      jQuery(function () {
+          SphinxRtdTheme.StickyNav.enable();
+      });
+  </script>
+   
+
+</body>
+</html>
