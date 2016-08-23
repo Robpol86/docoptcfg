@@ -6,13 +6,26 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-82627369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>docoptcfg &mdash; docoptcfg</title>
+  <title>docoptcfg 1.0.2 &mdash; docoptcfg</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -34,7 +47,7 @@
 
   
     <link rel="top" title="docoptcfg" href="#"/>
-        <link rel="next" title="Usage and API" href="usage.html"/> 
+        <link rel="next" title="Installation" href="install.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -84,10 +97,16 @@
           
             
             
-                <ul>
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config_files.html">Configuration Files</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
             
@@ -122,11 +141,13 @@
   <ul class="wy-breadcrumbs">
     <li><a href="#">Docs</a> &raquo;</li>
       
-    <li>docoptcfg</li>
+    <li>docoptcfg 1.0.2</li>
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="_sources/index.txt" rel="nofollow"> View page source</a>
+          
+            <a href="https://github.com/Robpol86/docoptcfg/blob/master/docs/index.rst" class="fa fa-github"> Edit on GitHub</a>
+          
         
       
     </li>
@@ -146,8 +167,8 @@
 
     <p class="scv-banner scv-sphinx_rtd_theme"><a href="v1.0.2/index.html"><b>Warning:</b> This document is for the development version of docoptcfg. The latest version is v1.0.2.</a></p>
 
-  <div class="section" id="docoptcfg">
-<h1>docoptcfg<a class="headerlink" href="#docoptcfg" title="Permalink to this headline">¶</a></h1>
+  <div class="section" id="docoptcfg-version">
+<h1>docoptcfg 1.0.2<a class="headerlink" href="#docoptcfg-version" title="Permalink to this headline">¶</a></h1>
 <p>Love using <a class="reference external" href="http://docopt.org/">docopt</a> over argparse or <a class="reference external" href="http://click.pocoo.org/">Click</a>? Wish it took care of
 environment variables and/or config files?</p>
 <p>docoptcfg is a wrapper for docopt which handles reading configuration data from environment variables and/or an INI/INF
@@ -215,15 +236,19 @@ also trump config files. The order of operations from low to high priority is: <
 <div class="section" id="project-links">
 <h2>Project Links<a class="headerlink" href="#project-links" title="Permalink to this headline">¶</a></h2>
 <ul class="simple">
-<li>Documentation: <a class="reference external" href="https://docoptcfg.readthedocs.org">https://docoptcfg.readthedocs.org</a></li>
+<li>Documentation: <a class="reference external" href="https://robpol86.github.io/docoptcfg">https://robpol86.github.io/docoptcfg</a></li>
 <li>Source code: <a class="reference external" href="https://github.com/Robpol86/docoptcfg">https://github.com/Robpol86/docoptcfg</a></li>
 <li>PyPI homepage: <a class="reference external" href="https://pypi.python.org/pypi/docoptcfg">https://pypi.python.org/pypi/docoptcfg</a></li>
 </ul>
-</div>
-<div class="section" id="contents">
-<h2>Contents<a class="headerlink" href="#contents" title="Permalink to this headline">¶</a></h2>
-<div class="toctree-wrapper compound">
+<div class="toctree-wrapper compound" id="general">
+<p class="caption"><span class="caption-text">General</span><a class="headerlink" href="#general" title="Permalink to this toctree">¶</a></p>
 <ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="install.html#pip-install">Pip Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#latest-from-github">Latest from GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="install.html#clone-and-install">Clone and Install</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a><ul>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#installation">Installation</a></li>
 <li class="toctree-l2"><a class="reference internal" href="usage.html#keyword-arguments">Keyword Arguments</a><ul>
@@ -258,6 +283,12 @@ also trump config files. The order of operations from low to high priority is: <
 </li>
 </ul>
 </div>
+<div class="toctree-wrapper compound" id="appendix">
+<p class="caption"><span class="caption-text">Appendix</span><a class="headerlink" href="#appendix" title="Permalink to this toctree">¶</a></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
+</ul>
+</div>
 </div>
 </div>
 
@@ -269,7 +300,7 @@ also trump config files. The order of operations from low to high priority is: <
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
-        <a href="usage.html" class="btn btn-neutral float-right" title="Usage and API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+        <a href="install.html" class="btn btn-neutral float-right" title="Installation" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
       
     </div>
@@ -309,7 +340,6 @@ also trump config files. The order of operations from low to high priority is: <
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="stage/index.html">stage</a></dd>
             <dd><a href="master/index.html">master</a></dd>
             <dd><a href="fix_repeating/index.html">fix_repeating</a></dd>
         </dl>
@@ -325,7 +355,7 @@ also trump config files. The order of operations from low to high priority is: <
             VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  false
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

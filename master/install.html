@@ -20,7 +20,7 @@
     </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
-  <title>Changelog &mdash; docoptcfg</title>
+  <title>Installation &mdash; docoptcfg</title>
   
 
   
@@ -47,7 +47,8 @@
 
   
     <link rel="top" title="docoptcfg" href="index.html"/>
-        <link rel="prev" title="Configuration Files" href="config_files.html"/> 
+        <link rel="next" title="Usage and API" href="usage.html"/>
+        <link rel="prev" title="docoptcfg 1.0.2" href="index.html"/> 
 
   
   <script src="_static/js/modernizr.min.js"></script>
@@ -98,20 +99,20 @@
             
             
                 <p class="caption"><span class="caption-text">General</span></p>
-<ul>
-<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
+<ul class="current">
+<li class="toctree-l1 current"><a class="current reference internal" href="#">Installation</a><ul>
+<li class="toctree-l2"><a class="reference internal" href="#pip-install">Pip Install</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#latest-from-github">Latest from GitHub</a></li>
+<li class="toctree-l2"><a class="reference internal" href="#clone-and-install">Clone and Install</a></li>
+</ul>
+</li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config_files.html">Configuration Files</a></li>
 </ul>
 <p class="caption"><span class="caption-text">Appendix</span></p>
-<ul class="current">
-<li class="toctree-l1 current"><a class="current reference internal" href="#">Changelog</a><ul>
-<li class="toctree-l2"><a class="reference internal" href="#id2">1.0.2 - 2016-06-28</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id3">1.0.1 - 2016-01-25</a></li>
-<li class="toctree-l2"><a class="reference internal" href="#id4">1.0.0 - 2016-01-25</a></li>
-</ul>
-</li>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
             
@@ -146,12 +147,12 @@
   <ul class="wy-breadcrumbs">
     <li><a href="index.html">Docs</a> &raquo;</li>
       
-    <li>Changelog</li>
+    <li>Installation</li>
     <li class="wy-breadcrumbs-aside">
       
           
           
-            <a href="https://github.com/Robpol86/docoptcfg/blob/stage/docs/changelog.rst" class="fa fa-github"> Edit on GitHub</a>
+            <a href="https://github.com/Robpol86/docoptcfg/blob/master/docs/install.rst" class="fa fa-github"> Edit on GitHub</a>
           
         
       
@@ -172,34 +173,33 @@
 
     <p class="scv-banner scv-sphinx_rtd_theme"><b>Warning:</b> This document is for the development version of docoptcfg.</p>
 
-  <div class="section" id="changelog">
-<span id="id1"></span><h1>Changelog<a class="headerlink" href="#changelog" title="Permalink to this headline">¶</a></h1>
-<p>This project adheres to <a class="reference external" href="http://semver.org/">Semantic Versioning</a>.</p>
-<div class="section" id="id2">
-<h2>1.0.2 - 2016-06-28<a class="headerlink" href="#id2" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Fixed</dt>
-<dd><ul class="first last simple">
-<li>Bug where docoptcfg failed to handle positional arguments with repeating args/opts.</li>
-</ul>
-</dd>
-</dl>
+  <div class="section" id="installation">
+<span id="install"></span><h1>Installation<a class="headerlink" href="#installation" title="Permalink to this headline">¶</a></h1>
+<p>Getting started is pretty simple. The first step is to install the library.</p>
+<div class="section" id="pip-install">
+<h2>Pip Install<a class="headerlink" href="#pip-install" title="Permalink to this headline">¶</a></h2>
+<p>The easiest way to get docoptcfg is to use <a class="reference external" href="https://pip.pypa.io">pip</a>. Simply run this command.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install docoptcfg
+</pre></div>
 </div>
-<div class="section" id="id3">
-<h2>1.0.1 - 2016-01-25<a class="headerlink" href="#id3" title="Permalink to this headline">¶</a></h2>
-<dl class="docutils">
-<dt>Fixed</dt>
-<dd><ul class="first last simple">
-<li>setup.py was previously configured for packages, not modules.</li>
-</ul>
-</dd>
-</dl>
 </div>
-<div class="section" id="id4">
-<h2>1.0.0 - 2016-01-25<a class="headerlink" href="#id4" title="Permalink to this headline">¶</a></h2>
-<ul class="simple">
-<li>Initial release.</li>
-</ul>
+<div class="section" id="latest-from-github">
+<h2>Latest from GitHub<a class="headerlink" href="#latest-from-github" title="Permalink to this headline">¶</a></h2>
+<p>You can also elect to install the latest bleeding-edge version by using pip to install directly from the GitHub
+repository.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>pip install git+https://github.com/Robpol86/docoptcfg.git
+</pre></div>
+</div>
+</div>
+<div class="section" id="clone-and-install">
+<h2>Clone and Install<a class="headerlink" href="#clone-and-install" title="Permalink to this headline">¶</a></h2>
+<p>Lastly you can also just clone the repo and install from it. Usually you only need to do this if you plan on
+<a class="reference external" href="https://github.com/Robpol86/docoptcfg/blob/master/CONTRIBUTING.md">contributing</a> to the project.</p>
+<div class="highlight-bash"><div class="highlight"><pre><span></span>git clone https://github.com/Robpol86/docoptcfg.git
+<span class="nb">cd</span> docoptcfg
+python setup.py install
+</pre></div>
+</div>
 </div>
 </div>
 
@@ -211,8 +211,10 @@
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="usage.html" class="btn btn-neutral float-right" title="Usage and API" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
       
-        <a href="config_files.html" class="btn btn-neutral" title="Configuration Files" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
+      
+        <a href="index.html" class="btn btn-neutral" title="docoptcfg 1.0.2" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
     </div>
   
@@ -239,7 +241,7 @@
 <div class="rst-versions" data-toggle="rst-versions" role="note" aria-label="versions">
     <span class="rst-current-version" data-toggle="rst-current-version">
         <span class="fa fa-book"> Other Versions</span>
-        v: stage
+        v: master
         <span class="fa fa-caret-down"></span>
     </span>
     <div class="rst-other-versions">
@@ -251,8 +253,7 @@
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="changelog.html">stage</a></dd>
-            <dd><a href="../master/index.html">master</a></dd>
+            <dd><a href="install.html">master</a></dd>
             <dd><a href="../fix_repeating/index.html">fix_repeating</a></dd>
         </dl>
     </div>

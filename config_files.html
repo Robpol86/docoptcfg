@@ -6,13 +6,26 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-82627369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Configuration Files &mdash; docoptcfg</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -34,6 +47,7 @@
 
   
     <link rel="top" title="docoptcfg" href="index.html"/>
+        <link rel="next" title="Changelog" href="changelog.html"/>
         <link rel="prev" title="Environment Variables" href="env_vars.html"/> 
 
   
@@ -84,7 +98,9 @@
           
             
             
-                <ul class="current">
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a></li>
 <li class="toctree-l1 current"><a class="current reference internal" href="#">Configuration Files</a><ul>
@@ -100,6 +116,10 @@
 <li class="toctree-l2"><a class="reference internal" href="#repeating-options">Repeating Options</a></li>
 </ul>
 </li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
             
@@ -138,7 +158,9 @@
     <li class="wy-breadcrumbs-aside">
       
           
-          <a href="_sources/config_files.txt" rel="nofollow"> View page source</a>
+          
+            <a href="https://github.com/Robpol86/docoptcfg/blob/master/docs/config_files.rst" class="fa fa-github"> Edit on GitHub</a>
+          
         
       
     </li>
@@ -290,6 +312,8 @@ strings).</p>
   
     <div class="rst-footer-buttons" role="navigation" aria-label="footer navigation">
       
+        <a href="changelog.html" class="btn btn-neutral float-right" title="Changelog" accesskey="n">Next <span class="fa fa-arrow-circle-right"></span></a>
+      
       
         <a href="env_vars.html" class="btn btn-neutral" title="Environment Variables" accesskey="p"><span class="fa fa-arrow-circle-left"></span> Previous</a>
       
@@ -330,7 +354,6 @@ strings).</p>
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="stage/config_files.html">stage</a></dd>
             <dd><a href="master/config_files.html">master</a></dd>
             <dd><a href="fix_repeating/config_files.html">fix_repeating</a></dd>
         </dl>
@@ -346,7 +369,7 @@ strings).</p>
             VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  false
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>

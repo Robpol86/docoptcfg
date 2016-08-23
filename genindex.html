@@ -7,13 +7,26 @@
 <!--[if gt IE 8]><!--> <html class="no-js" lang="en" > <!--<![endif]-->
 <head>
   <meta charset="utf-8">
-  
+  <script type="text/javascript">
+
+      var _gaq = _gaq || [];
+      _gaq.push(['_setAccount', 'UA-82627369-1']);
+      _gaq.push(['_trackPageview']);
+
+      (function() {
+        var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+        ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+        var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+      })();
+    </script>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   
   <title>Index &mdash; docoptcfg</title>
   
 
   
+  
+    <link rel="shortcut icon" href="_static/favicon.ico"/>
   
 
   
@@ -84,10 +97,16 @@
           
             
             
-                <ul>
+                <p class="caption"><span class="caption-text">General</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="install.html">Installation</a></li>
 <li class="toctree-l1"><a class="reference internal" href="usage.html">Usage and API</a></li>
 <li class="toctree-l1"><a class="reference internal" href="env_vars.html">Environment Variables</a></li>
 <li class="toctree-l1"><a class="reference internal" href="config_files.html">Configuration Files</a></li>
+</ul>
+<p class="caption"><span class="caption-text">Appendix</span></p>
+<ul>
+<li class="toctree-l1"><a class="reference internal" href="changelog.html">Changelog</a></li>
 </ul>
 
             
@@ -126,6 +145,10 @@
     <li class="wy-breadcrumbs-aside">
       
           
+          
+            <a href="https://github.com/Robpol86/docoptcfg/blob/master/docs/genindex.rst" class="fa fa-github"> Edit on GitHub</a>
+          
+        
       
     </li>
   </ul>
@@ -181,7 +204,6 @@
         </dl>
         <dl>
             <dt>Branches</dt>
-            <dd><a href="stage/index.html">stage</a></dd>
             <dd><a href="master/genindex.html">master</a></dd>
             <dd><a href="fix_repeating/index.html">fix_repeating</a></dd>
         </dl>
@@ -197,7 +219,7 @@
             VERSION:'1.0.2',
             COLLAPSE_INDEX:false,
             FILE_SUFFIX:'.html',
-            HAS_SOURCE:  true
+            HAS_SOURCE:  false
         };
     </script>
       <script type="text/javascript" src="_static/jquery.js"></script>
