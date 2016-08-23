@@ -13,10 +13,10 @@ use both at the same time:
 2. ``args = docoptcfg(__doc__, config_option='--config')``
 3. ``args = docoptcfg(__doc__, config_option='--config', env_prefix='MYAPP_')``
 
-📖 Full documentation: https://docoptcfg.readthedocs.org
-
 * Python 2.6, 2.7, PyPy, PyPy3, 3.3, 3.4, and 3.5 supported on Linux and OS X.
 * Python 2.7, 3.3, 3.4, and 3.5 supported on Windows (both 32 and 64 bit versions of Python).
+
+📖 Full documentation: https://robpol86.github.io/docoptcfg
 
 .. image:: https://img.shields.io/appveyor/ci/Robpol86/docoptcfg/master.svg?style=flat-square&label=AppVeyor%20CI
     :target: https://ci.appveyor.com/project/Robpol86/docoptcfg
@@ -43,6 +43,8 @@ Install:
 
     pip install docoptcfg
 
+.. changelog-section-start
+
 Changelog
 =========
 
@@ -64,3 +66,5 @@ Fixed
 ------------------
 
 * Initial release.
+
+.. changelog-section-end

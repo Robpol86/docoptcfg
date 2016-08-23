@@ -1,6 +1,6 @@
-=========
-docoptcfg
-=========
+===================
+docoptcfg |version|
+===================
 
 Love using `docopt <http://docopt.org/>`_ over argparse or `Click <http://click.pocoo.org/>`_? Wish it took care of
 environment variables and/or config files?
@@ -78,16 +78,21 @@ Our result is:
 Project Links
 =============
 
-* Documentation: https://docoptcfg.readthedocs.org
+* Documentation: https://robpol86.github.io/docoptcfg
 * Source code: https://github.com/Robpol86/docoptcfg
 * PyPI homepage: https://pypi.python.org/pypi/docoptcfg
 
-Contents
-========
-
 .. toctree::
     :maxdepth: 3
+    :caption: General
 
+    install
     usage
     env_vars
     config_files
+
+.. toctree::
+    :maxdepth: 1
+    :caption: Appendix
+
+    changelog

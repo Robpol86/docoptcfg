@@ -69,12 +69,12 @@ def settable_options(doc, argv, ignore, options_first):
         for option in pattern.fix().flat():
             if not hasattr(option, 'long'):
                 continue  # Positional argument or sub-command.
-            if option.long not in settable:
+            if getattr(option, 'long') not in settable:
                 continue  # Don't care about this if we can't set it.
-            if option.long in booleans and option.value == 0:
-                repeatable.add(option.long)
-            elif hasattr(option.value, '__iter__'):
-                repeatable.add(option.long)
+            if getattr(option, 'long') in booleans and getattr(option, 'value') == 0:
+                repeatable.add(getattr(option, 'long'))
+            elif hasattr(getattr(option, 'value'), '__iter__'):
+                repeatable.add(getattr(option, 'long'))
 
     return settable, booleans, repeatable, short_map
 
